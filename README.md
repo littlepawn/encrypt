@@ -1,0 +1,2 @@
+1.RSA加密解密有个填充方式padding的参数，不同编程语言之间交互，需要注意这个。 padding can be one of OPENSSL_PKCS1_PADDING, OPENSSL_SSLV23_PADDING, OPENSSL_PKCS1_OAEP_PADDING,OPENSSL_NO_PADDING 值得注意的是，如果选择密钥是1024bit长的（openssl genrsa -out rsa_private_key.pem 1024），那么支持加密的明文长度字节最多只能是1024/8=128byte； 如果加密的padding填充方式选择的是OPENSSL_PKCS1_PADDING（这个要占用11个字节），那么明文长度最多只能就是128-11=117字节。如果超出，那么这些openssl加解密函数会返回false。
+2.1024生成的秘钥OPENSSL_PKCS1_PADDING填充明文最长117字节  但是加密如果用了base64编码 解密的话需要按每172字节去截取  这个172字节是因为base64
